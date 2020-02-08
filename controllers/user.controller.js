@@ -13,9 +13,11 @@ class UserController {
   static async update(req, res) {    
     res.send(await new User().update(req.params.id, req.body));
   }
-  static async delete(req, res) {
-    await new User().delete(req.params.id)
-    res.send(`user ${req.params.id} deleted`);
+  static async delete(req, res) {    
+    res.send({
+      object: await new User().delete(req.params.id),
+      success: true
+    });
   }
 }
 

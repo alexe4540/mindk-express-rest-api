@@ -14,8 +14,10 @@ class ProductController {
     res.send(await new Product().update(req.params.id, req.body));
   }
   static async delete(req, res) {
-    await new Product().delete(req.params.id);
-    res.send(`Product ${req.params.id} deleted`);
+    res.send({
+      object: await new Product().delete(req.params.id),
+      success: true
+    });
   }
 }
 
