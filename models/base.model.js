@@ -17,6 +17,7 @@ class BaseModel {
 
   create(data){
     return this.table
+      .returning('*')
       .insert(data);
   }
 

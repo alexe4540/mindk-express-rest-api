@@ -5,13 +5,12 @@ class UserController {
     res.send(await new User().getList());
   }
   static async create(req, res) {
-    await new User().create(req.body)
-    res.send(`user ${req.body.name} added`);
+    res.send(await new User().create(req.body));
   }
   static async read(req, res) {
     res.send(await new User().find(req.params.id));
   }
-  static update(req, res) {
+  static async update(req, res) {
     await new User().update(req.params.id, req.body);
     res.send(`user ${req.params.id} updated`);
   }

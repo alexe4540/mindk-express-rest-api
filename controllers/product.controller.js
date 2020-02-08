@@ -5,13 +5,12 @@ class ProductController {
     res.send(await new Product().getList());
   }
   static async create(req, res) {
-    await new Product().create(req.body);
-    res.send(`product ${req.body.p_name} added`);
+        res.send(await new Product().create(req.body));
   }
   static async read(req, res) {
     res.send(await new Product().find(req.params.id));
   }
-  static update(req, res) {
+  static async update(req, res) {
     await new Product().update(req.params.id, req.body);
     res.send(`product ${req.params.id} updated`);
   }
