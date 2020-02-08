@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const users = require('./routes/users');
@@ -8,12 +8,12 @@ const categories = require('./routes/categories');
 const serviceLocator = require('./services/service.locator');
 
 serviceLocator.register('db', require('knex')({
-    client: 'pg',
+    client: process.env.DB_DRIVER,
     connection: {      
-        host : '127.0.0.1',
-        user : 'postgres',
-        password : 'pass',
-        database : 'fakebd'
+        host : process.env.DB_HOST,
+        user : process.env.DB_USER,
+        password : process.env.DB_PASS,
+        database : process.env.DB_NAME
     }
   }))
 
@@ -29,5 +29,4 @@ app.use('/category', categories)
 
 
 // Start app:
-//app.listen(process.env.APP_PORT, () => console.log(`API listening on port ${process.env.APP_PORT}!`))
-app.listen(3000, () => console.log(`API listening on port ${3000}!`))
+app.listen(process.env.APP_PORT, () => console.log(`API listening on port ${process.env.APP_PORT}!`))
