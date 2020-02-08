@@ -12,7 +12,7 @@ class OrderController {
   }
   static async update(req, res) {
     await new Order().update(req.params.id, req.body);
-    res.send(`category ${req.params.id} updated`);
+    res.send(await new Order().update(req.params.id, req.body));
   }
   static async delete(req, res) {
     await new Order().delete(req.params.id);

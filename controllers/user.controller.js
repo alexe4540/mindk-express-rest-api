@@ -10,9 +10,8 @@ class UserController {
   static async read(req, res) {
     res.send(await new User().find(req.params.id));
   }
-  static async update(req, res) {
-    await new User().update(req.params.id, req.body);
-    res.send(`user ${req.params.id} updated`);
+  static async update(req, res) {    
+    res.send(await new User().update(req.params.id, req.body));
   }
   static async delete(req, res) {
     await new User().delete(req.params.id)
