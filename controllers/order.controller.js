@@ -11,12 +11,13 @@ class OrderController {
     res.send(await new Order().find(req.params.id));
   }
   static async update(req, res) {
-    await new Order().update(req.params.id, req.body);
-    res.send(`category ${req.params.id} updated`);
+    res.send(await new Order().update(req.params.id, req.body));
   }
   static async delete(req, res) {
-    await new Order().delete(req.params.id);
-    res.send(`Order ${req.params.id} deleted`);
+    res.send({
+      object: await new Order().delete(req.params.id),
+      success: true
+    });
   }
 }
 

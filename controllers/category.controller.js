@@ -10,12 +10,14 @@ class CategoryController {
   static async read(req, res) {
     res.send(await new Category().find(req.params.id));
   }
-  static async update(req, res) {
+  static async update(req, res) {    
     res.send(await new Category().update(req.params.id, req.body));
   }
-  static async delete(req, res) {
-    await new Category().delete(req.params.id);
-    res.send(`category ${req.params.id} deleted`);
+  static async delete(req, res) {    
+    res.send({
+      object: await new Category().delete(req.params.id),
+      success: true
+    });
   }
 }
 

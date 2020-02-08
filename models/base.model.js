@@ -30,6 +30,7 @@ class BaseModel {
 
   delete(columName, id) {
     return this.table
+      .returning('*')
       .where(columName, id)
       .del();
   }
