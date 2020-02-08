@@ -23,12 +23,14 @@ class BaseModel {
 
   update(columName, id, data){
     return this.table
+      .returning('*')
       .where(columName, id)
       .update(data);
   }
 
   delete(columName, id) {
     return this.table
+      .returning('*')
       .where(columName, id)
       .del();
   }
