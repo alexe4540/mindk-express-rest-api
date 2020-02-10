@@ -18,7 +18,7 @@ class BaseModel {
       .where(this.primaryKeyName, id);
   }
 
-  create(data){
+  create(data){    
     return this.table
       .returning('*')
       .insert(data);
