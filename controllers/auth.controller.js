@@ -39,14 +39,10 @@ class AuthController {
     const user = req.user;
     const UserModel = new User();
 
-    console.log(user);
-
-    //user.token = uuidv4();
-    //await UserModel.update(user.user_id ,user);
+    user.token = uuidv4();
+    await UserModel.update(user.user_id ,user);
 
     delete req.user;
-
-    console.log(' after delete',req.user);
 
     res.send({status: "success"})
   }
