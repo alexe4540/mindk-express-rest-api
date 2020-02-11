@@ -12,6 +12,7 @@ const orders = require('./routes/orders');
 const categories = require('./routes/categories');
 
 const passport = require('./auth/passport');
+const authMiddleware = require("./auth/authMiddleware")
 
 serviceLocator.register('db', require('knex')({
     client: process.env.DB_DRIVER,
@@ -28,6 +29,8 @@ serviceLocator.register('db', require('knex')({
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
+
+app.use(authMiddleware);
 
 app.use(auth);
 app.use('/user', users);

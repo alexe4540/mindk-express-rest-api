@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
 const uuidv4 = require('uuid/v4')
 const User = require('../models/users')
-//const Roles = require('./acl').Roles
+const Roles = require('./acl').Roles
 
 passport.use(new LocalStrategy(
     async function(username, password, done) {
@@ -26,7 +26,7 @@ passport.use(new LocalStrategy(
 passport.use(new BearerStrategy(
     async function(token, done) {
         const UserModel = new User()
-        const user = await UserModel.getUserByToken(token)
+        const user = await UserModel.getUserByToken(token);
 
         if(!user) {
             // return error

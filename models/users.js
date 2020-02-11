@@ -30,7 +30,7 @@ class User extends BaseModel {
      */
     getUserByToken(token){
         return this.table
-            .select(['role', 'name', 'email', 'id'])
+            .select(['role', 'name', 'username', 'user_id'])
             .where('token', token)
             .first()
     }

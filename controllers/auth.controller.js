@@ -1,6 +1,7 @@
 const passport = require("../auth/passport");
 const User = require("../models/users");
 const md5 = require("md5");
+const uuidv4 = require('uuid/v4')
 
 class AuthController {
   static login(req, res, next) {
@@ -34,6 +35,21 @@ class AuthController {
     res.send(newUser);
   }
 
+  static async logout(req, res){
+    const user = req.user;
+    const UserModel = new User();
+
+    console.log(user);
+
+    //user.token = uuidv4();
+    //await UserModel.update(user.user_id ,user);
+
+    delete req.user;
+
+    console.log(' after delete',req.user);
+
+    res.send({status: "success"})
+  }
 
 }
 
