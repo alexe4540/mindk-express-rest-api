@@ -1,37 +1,40 @@
 const serviceLocator = require("../services/service.locator");
 
 class BaseModel {
-  constructor(tableName) {
-    this.table = serviceLocator.get("db").table(tableName);
+  constructor(tableName, primaryKeyName = 'id') {
+    this.table = serviceLocator
+      .get("db")
+      .table(tableName);
+    this.primaryKeyName = primaryKeyName;
   }
 
   getList() {
     return this.table.select("*");
   }
 
-  find(columName, id) {
+  find(id) {
     return this.table
       .select("*")
-      .where(columName, id);
+      .where(this.primaryKeyName, id);
   }
 
-  create(data){
+  create(data){    
     return this.table
       .returning('*')
       .insert(data);
   }
 
-  update(columName, id, data){
+  update(id, data){
     return this.table
       .returning('*')
-      .where(columName, id)
+      .where(this.primaryKeyName, id)
       .update(data);
   }
 
-  delete(columName, id) {
+  delete(id) {
     return this.table
       .returning('*')
-      .where(columName, id)
+      .where(this.primaryKeyName, id)
       .del();
   }
 }
